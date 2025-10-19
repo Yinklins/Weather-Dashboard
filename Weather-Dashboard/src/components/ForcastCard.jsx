@@ -1,66 +1,48 @@
-import { CloudRain, Cloud, Sun, CloudSnow, CloudDrizzle } from "lucide-react";
+import { Calendar, Droplet } from 'lucide-react'
+import React from 'react'
 
-const getWeatherIcon = (condition = "") => {
-  const lowerCondition = condition?.toLowerCase() || "";
-
-  if (lowerCondition.includes("rain")) return CloudRain;
-  if (lowerCondition.includes("snow")) return CloudSnow;
-  if (lowerCondition.includes("drizzle")) return CloudDrizzle;
-  if (lowerCondition.includes("cloud")) return Cloud;
-
-  return Sun;
-};
-
-export function ForecastCard({ forecast = [] }) {
-  if (!Array.isArray(forecast) || forecast.length === 0) {
-    return (
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-        <h2 className="text-2xl mb-6 text-gray-900">7-Day Forecast</h2>
-        <p className="text-gray-500">No forecast data available.</p>
-      </div>
-    );
-  }
-
+function ForcastCard() {
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-      <h2 className="text-2xl mb-6 text-gray-900">7-Day Forecast</h2>
-      <div className="space-y-3">
-        {forecast.map((day, index) => {
-          const WeatherIcon = getWeatherIcon(day?.condition);
+    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
+      <div className="flex items-center space-x-3 mb-8">
+        <div className="p-2 bg-white/10 rounded-full">
+          <Calendar className="w-6 h-6 text-white/80" />
+        </div>
+        <h2 className="text-2xl font-bold text-white">5 Day Forecast</h2>
+      </div>
 
-          return (
-            <div
-              key={index}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-            >
-              <div className="flex items-center gap-4 flex-1">
-                <div className="w-20">
-                  <p className="text-gray-900">{day?.day}</p>
-                  <p className="text-sm text-gray-500">{day?.date}</p>
-                </div>
-
-                {WeatherIcon && <WeatherIcon className="w-6 h-6 text-blue-500" />}
-
-                <p className="text-sm flex-1 text-gray-700">{day?.condition}</p>
+      <div className="space-y-4">
+        {/* Map Method Logic */}
+        <div className="flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-300 group border Oborder-white-10">
+          <div className="flex items-center space-x-5 flex-1">
+            <div className=" text-white/90 group-hover:text-white transition-all transform group-hover:scale-110 duration">
+              {/* Dynamic Icons */}
+            </div>
+            <div className="flex-1">
+              <div className="text-white font-semibold text-lg">
+                {/* Conditional Date */}
               </div>
-
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <p className="text-sm text-gray-500">High / Low</p>
-                  <p className="text-gray-900">
-                    {day?.high}° / {day?.low}°
-                  </p>
-                </div>
-
-                <div className="w-16 text-right">
-                  <p className="text-sm text-gray-500">Rain</p>
-                  <p className="text-blue-500">{day?.precipitation}%</p>
-                </div>
+              <div className="text-white/70 text-sm capitalize font-medium">
+                Weather Description
               </div>
             </div>
-          );
-        })}
+          </div>
+          <div className='flex items-center space-x-6'>
+            <div className='flex items-center space-x-2 text-white/60'>
+              <Droplet className='w-4 h-4 text-blue-300' />
+              <span className=' text-sm font-medium'>
+                {/* dynamic details */}
+              </span>
+            </div>
+            <div className="text-right">
+              <div className="text-whtie font-bold text-xl">Temperate</div>
+              <div className="text-whtie text-sm font-medium">Main Temp</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default ForcastCard;
