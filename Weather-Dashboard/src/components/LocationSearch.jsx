@@ -113,19 +113,26 @@ function LocationSearch({ onSearch, onLocationSearch, loading }) {
               <p>Searching cities...</p>
             </div>
           ) : (
-            suggestions.map((city, index) => (
-              <button
-                key={`${city.name}-${city.country}-${index}`}
-                className="w-full px-6 py-4 flex justify-between items-center hover:bg-white/20 border-b border-white/10 last:border-b-0 text-white text-left"
-                onClick={() => handleSuggestionClick(city)}
-              >
-                <span>
-                  {city.name}
-                  {city.state && <span>, {city.state}</span>}
-                </span>
-                <span className="text-sm text-white/60">{city.country}</span>
-              </button>
-            ))
+            suggestions.map((city, index) => {
+              return (
+                <button
+                  className="w-full px-6 py-4 flex justify-between items-center hover:bg-white/20 border-b border-white/10 last:border-b-0 text-white text-left"
+                  key={`${city.name}-${city.country}-${index}`}
+                  onClick={() => handleSuggestionClick(city)}
+                >
+                  <div>
+                    <div className="font-medium text-white group-hover:text-white/90">
+                      {city.name}
+                      {city.state && (
+                        <span className='text-white/70'>,{city.state}</span>
+                      )}
+                    </div>
+                    <div className="text-sm text-white">{city.country}</div>
+                  </div>
+                  <Search className='w-4 h-4 text-white/40 group-hover:text-white/60 transition-all' />
+                </button>
+              );
+            })
           )}
         </div>
       )}
