@@ -4,7 +4,7 @@ import Temperature from './components/Temperature'
 import Spinner from './components/Spinner'
 import ErrorMessage from './components/ErrorMessage'
 import WeatherCard from './components/WeatherCard'
-import ForcastCard from './components/ForcastCard'
+import ForecastCard from './components/ForcastCard'
 import { useWeather } from './hooks/useWeather'
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
             </div>
             <div className='xl:col-span-1'>
               {/* conditional rendering */}
-              {forecast && <ForcastCard />}
+              {forecast && <ForecastCard forecast = {forecast} unit = {unit} />}
             </div>
           </div>
           )}

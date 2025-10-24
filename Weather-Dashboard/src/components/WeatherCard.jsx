@@ -98,7 +98,7 @@ function WeatherCard({weather, unit}) {
                 {/* Map Methord Logic */}
                 {WeatherStats.map((stat, index) => {
                     return (
-                        <div className='bg-white/5 backdrop-blure-sm rounded-2xl p4 hover:bg-white/10 transition-all duration-300 group '>
+                        <div className='bg-white/5 backdrop-blure-sm rounded-2xl p4 hover:bg-white/10 transition-all duration-300 group ' key={index}>
                     <div className='flex items-center space-x-3 mb-2'>
                         <div className={`p-2 rounded-full bg-white/10 group-hover:bg-white/20 treansition-all`}>
                             {/* Dynamic Icons */}

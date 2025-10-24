@@ -2,10 +2,10 @@ import React from 'react'
 
 function Spinner() {
   return (
-    <div class='flex item-center justify-center p-12'>
+    <div className='flex item-center justify-center p-12'>
         <div className='relative'>
             {/* Outer Ring */}
-            <div class='w-20 h-20 border-4 border-white/20 rounded-full animate-spin border-t-white/80 shardow-lg'>
+            <div className='w-20 h-20 border-4 border-white/20 rounded-full animate-spin border-t-white/80 shardow-lg'>
             </div>
             {/* Inner ring */}
             <div className='absolute inser-2 w-12 h-12 border-3 border-blue-200/30 rounded-full animate-spin border-t-blue-200/80 animation-delay-150'>
