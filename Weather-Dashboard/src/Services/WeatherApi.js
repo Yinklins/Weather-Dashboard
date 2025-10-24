@@ -16,11 +16,11 @@ export const getCurrentWeather = async (city) => {
         throw new Error(
           `Invalid API Key, please check your OpenWeatherMap API configuration`
         );
+      } else {
+        throw new Error(
+          "Weahter service is temporarily unavailable.Please try Again later."
+        );
       }
-    } else {
-      throw new Error(
-        "Weahter service is temporarily unavailable.Please try Again later."
-      );
     }
 
     const data = await response.json();
@@ -50,11 +50,11 @@ export const getCurrentWeatherByCoords = async (lat, lon) => {
         throw new Error(
           `Invalid API Key, please check your OpenWeatherMap API configuration`
         );
+      } else {
+        throw new Error(
+          "Weahter service is temporarily unavailable.Please try Again later."
+        );
       }
-    } else {
-      throw new Error(
-        "Weahter service is temporarily unavailable.Please try Again later."
-      );
     }
 
     const data = await response.json();
@@ -88,11 +88,11 @@ export const getWeatherForecast = async (city) => {
         throw new Error(
           `Invalid API Key, please check your OpenWeatherMap API configuration`
         );
+      } else {
+        throw new Error(
+          "Weahter service is temporarily unavailable.Please try Again later."
+        );
       }
-    } else {
-      throw new Error(
-        "Weahter service is temporarily unavailable.Please try Again later."
-      );
     }
 
     return await response.json();

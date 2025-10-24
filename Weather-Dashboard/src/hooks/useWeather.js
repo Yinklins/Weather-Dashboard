@@ -74,7 +74,7 @@ export const useWeather = () => {
   // load default weather on mount
   useEffect(() => {
     fetchWeatherByCity("Nigeria");
-  });
+  }, []);
 
   return {
     currentWeather,

@@ -1,7 +1,46 @@
-import { MapPin, Sunrise, Sunset } from 'lucide-react'
+import { MapPin, Sunrise, Sunset, Eye, Wind, Droplets, Gauge, Thermometer, } from 'lucide-react'
 import React from 'react'
+import { formatTemperature, getWeatherIcon } from '../Utilities/utilities'
+import * as LucideIcons from "lucide-react";
 
-function WeatherCard() {
+function WeatherCard({weather, unit}) {
+    const iconName = getWeatherIcon(weather.weather[0]);
+    const IconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
+
+    const WeatherStats = [
+        {
+            icon: Eye,
+            label: "Visibility",
+            value: `${(weather.visibility / 1000).toFixed(1)} km`,
+            color: "text-blue-300",
+        },
+        {
+            icon: Wind,
+            label: "Wind Speed",
+            value: `${weather.wind.speed.toFixed(1)} m/s`,
+            color: "text-green-300",
+        },
+        {
+            icon: Droplets,
+            label: "Humidity",
+            value: `${weather.main.humidity} %`,
+            color: "text-cyan-300",
+        },
+        {
+            icon: Gauge,
+            label: "Pressure",
+            value: `${weather.main.Pressure} hPa`,
+            color: "text-purple-300",
+        },
+        {
+            icon: Thermometer,
+            label: "Feels Like",
+            value: `${formatTemperature(weather.main.feels_like, unit)}°${unit}`,
+            color: "text-orange-300",
+        },        
+    ]
+
+
     return (
         <div className='bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl hover:bg-white/15 transition-all duration-500'>
             {/* Header */}
@@ -11,16 +50,25 @@ function WeatherCard() {
                         <MapPin className='w-5 h-5 text-white/80' />
                     </div>
                     <div>
-                        <h2 className='text-white font-semibold text-lg'>Weather Name</h2>
-                        <p className='text-white/60 text-sm'>Weather Country</p>
+                        <h2 className='text-white font-semibold text-lg'>{weather.name}</h2>
+                        <p className='text-white/60 text-sm'>{weather.sys.country}</p>
                     </div>
                 </div>
                 <div className='text-right'>
                     <div className='text-white/70 text-sm'>
                         {/* Display Dynamic Date */}
-                    </div>
+                        {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
+                            weekday: "long",
+                            month: "short",
+                            day: "numeric",
+                        })}
+                    </div> 
                     <div className='text-white/50 text-xs'>
                         {/* Display Dynamic Date */}
+                        {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        })}
                     </div>
                 </div>
             </div>
@@ -29,13 +77,15 @@ function WeatherCard() {
             <div className='flex items-center justify-between mb-10'>
                 <div className='flex-1'>
                     <div className='text-7xl font-bold text-white mb-3 tracking-tight'>
-                        Main Temp
+                        {formatTemperature(weather.main.temp, unit)}°
+                        <span class= "text-4xl font-normal text-white/70">{unit}</span>
                     </div>
                     <div className='text-white/90 text-xl capitalize mb-2 font medium'>
-                        Weather Discription</div>
+                        {weather.weather[0].description}
+                        </div>
                     <div className='flex items-center space-x-4 text-white/60 text-sm'>
-                        <span>Max Temp</span>
-                        <span>Min Temp</span>
+                        <span>H: {formatTemperature(weather.main.temp_max, unit)}°</span>
+                        <span>L: {formatTemperature(weather.main.temp_max, unit)}°</span>
                     </div>
                 </div>
                 <div className='text-white/90 transform hover:scale-110 transition-transform duration-300 '>

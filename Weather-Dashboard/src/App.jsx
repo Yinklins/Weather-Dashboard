@@ -19,6 +19,13 @@ function App() {
     toggleUnit,
   } = useWeather ();
 
+  const handleRetry = () => {
+    if (currentWeather){
+      fetchWeatherByCity(currentWeather.name);
+    }else{
+    fetchWeatherByCity("Lagos")
+  };
+}
   return (
     <div className='bg-gray-500 h-screen relative overflow-hidden'>
       <div className="max-w7xl mx-auto">
@@ -34,13 +41,13 @@ function App() {
             onLocationSearch = {fetchWeatherByLocation}
             loading = {loading} 
             />
-            <Temperature />
+            <Temperature unit={unit} onToggle={toggleUnit} />
           </div>
         </div>
         {/* Main Content */}
         <div className='space-y-8'>
           {/* conditional rendering */}
-          {/* {loading && (
+          {loading && (
             <div className='flex justify-center'>
           <div className='bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20'>
           <Spinner />
@@ -49,20 +56,20 @@ function App() {
           </p>
           </div>
         </div>
-          )} */}
+          )}
 
           {/* Condition Rendering */}
-          {/* {error && !loading && (
+          {error && !loading && (
             <div className='max-w-2xl mx-auto'>
-        <ErrorMessage />
+        <ErrorMessage message = {error} onRetry = {handleRetry}  />
       </div>
-          )} */}
+          )}
 
           {/* Conditional Rendering for Weather card */}
           {currentWeather && !loading && (
             <div className='grid grid-cols-1 xl:grid-cols-3 gap-8'>
             <div className='xl:col-span-2'>
-              <WeatherCard />
+              <WeatherCard weather = {currentWeather}  unit = {unit}/>
             </div>
             <div className='xl:col-span-1'>
               {/* conditional rendering */}
